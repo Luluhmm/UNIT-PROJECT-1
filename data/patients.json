@@ -1,0 +1,14 @@
+{
+    "1": {
+        "name": "Ahmed",
+        "status": "stable",
+        "notes": [],
+        "alerted": true
+    },
+    "2": {
+        "name": "abdullah",
+        "status": "critical",
+        "notes": [],
+        "alerted": true
+    }
+}
