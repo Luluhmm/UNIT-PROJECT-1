@@ -36,8 +36,9 @@ def doctormenu(username):
         print("1. View Critical Patients ")
         print("2. View Pateint Details and history ")
         print("3. Add Note to Nurse ")
-        print("4. Exit ")
-        choice = input("Please enter your choice from the menu shown and type '4' to quit:  ")
+        print("4. View Patient History Chart")
+        print("5. Exit ")
+        choice = input("Please enter your choice from the menu shown and type '5' to quit:  ")
         
         if choice == "1":
             view_critical()
@@ -47,8 +48,11 @@ def doctormenu(username):
         
         elif choice == "3":
             add_note(drname)
-            
+        
         elif choice == "4":
+            plotHistory()
+            
+        elif choice == "5":
             print("Goodbye Dr!Thank you for your effort and joining yaqeth alert system!")
             break
            

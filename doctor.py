@@ -1,4 +1,6 @@
 from data.support import load_data, save_data
+import matplotlib.pyplot as plt
+from datetime import datetime
 
 file_path = "/Users/lulualmogbil/python-bootcamp/Yaqeth-UNIT-PROJECT-1/data/patients.json"
 def view_critical():# only outputs the critical patients
@@ -9,8 +11,8 @@ def view_critical():# only outputs the critical patients
         if value["status"] == "critical":
             print(f"[{i}] Patient name: {value['name']},Room No [{value['room']}]  - Responsible doctor is Dr. {value['doctor']}")
             found = True
-        if not found:
-            print("No critical cases yet. All patients are stabled")
+    if not found:
+        print("No critical cases yet. All patients are stabled")
 
 
 
@@ -39,7 +41,7 @@ def view_patient():
     
     print("Patient History: ")
     for value in patients[id]['history']:
-        print(f"{value['date'] }, Status : {value['status']}, Note: {value['note']}")
+        print(f"[{value['date'] }] - Status : {value['status']} - Note: {value['note']}")
     
 
 def add_note(drname):
@@ -57,5 +59,37 @@ def add_note(drname):
     save_data(file_path,patients)
     print(f"Dr {drname}'s Note Added")
     
+    
+    
+def plotHistory():
+    patients = load_data(file_path)
+    id = input("Enter patient id to view History Plot Progress: ")
+
+    if id not in patients:
+        print("Patient not found.")
+        return
+
+    history = patients[id]["history"]
+    if not history or len(history) < 2:
+        print("Not enough history to plot patient progress.")
+        return
+
+    dates = []
+    statusvalues = []
+    statusmap = {"stable": 1, "under observation": 2, "critical": 3}
+
+    for value in history:
+        dates.append(datetime.strptime(value["date"], "%Y-%m-%d %H:%M:%S"))
+        statusvalues.append(statusmap.get(value["status"],0)) # return zero if there is no status found
+
+    plt.figure(figsize=(8, 4))
+    plt.plot(dates, statusvalues, marker='*')
+    plt.yticks([1, 2, 3], ["Stable", "Under Obs.", "Critical"])
+    plt.xlabel("Date")
+    plt.ylabel("Status Level")
+    plt.title(f"History Plot for the patient {patients[id]['name']}")
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
     
     

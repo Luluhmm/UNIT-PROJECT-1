@@ -1,15 +1,18 @@
 import requests
+from dotenv import load_dotenv
+import os
 
-token = '8047687045:AAFdbN6MFUZzlV2_tVsQpxFchNoLYstrI7A'
-id = '1242534913'
+load_dotenv(dotenv_path="/Users/lulualmogbil/python-bootcamp/Yaqeth-UNIT-PROJECT-1/.env")
 
+token = os.getenv("TOKEN")
+chat_id = int(os.getenv("CHAT_ID")) 
 
 
 def send_alert(msg):
     print(f"Alert Test:  {msg}")
     url = f"https://api.telegram.org/bot{token}/sendMessage"
     payload = {
-        "chat_id": id,
+        "chat_id": chat_id,
         "text": msg
     }
     

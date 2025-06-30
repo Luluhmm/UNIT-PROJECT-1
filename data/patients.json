@@ -1,5 +1,5 @@
 {
-    "3": {
+    "1": {
         "name": "Yasmeen",
         "age": "25",
         "blood": "B+",
@@ -9,7 +9,7 @@
         "notes": [
             "Drink Water (by Dr. Khaled)"
         ],
-        "alerted": true,
+        "alerted": false,
         "last_alertby": "Amal",
         "nurse": "Amal",
         "history": [
@@ -27,6 +27,89 @@
                 "status": "stable",
                 "note": "Updated by Amal",
                 "date": "2025-06-30 03:33:58"
+            },
+            {
+                "status": "under observation",
+                "note": "Updated to under observation by Nurse Amal",
+                "date": "2025-06-30 04:16:04"
+            },
+            {
+                "status": "stable",
+                "note": "Updated to stable by Nurse Amal",
+                "date": "2025-06-30 14:14:23"
+            }
+        ]
+    },
+    "2": {
+        "name": "jason",
+        "age": "24",
+        "blood": "O-",
+        "doctor": "Lana",
+        "room": "209",
+        "status": "critical",
+        "notes": [],
+        "alerted": true,
+        "last_alertby": "Ruwaina",
+        "nurse": "Amal",
+        "history": [
+            {
+                "status": "stable",
+                "note": "Initial status set by Nurse Amal",
+                "date": "2025-06-30 04:15:12"
+            },
+            {
+                "status": "critical",
+                "note": "Updated to critical by Nurse Amal",
+                "date": "2025-06-30 04:42:17"
+            },
+            {
+                "status": "stable",
+                "note": "Updated to stable by Nurse Amal",
+                "date": "2025-06-30 13:56:05"
+            },
+            {
+                "status": "stable",
+                "note": "Manual alert triggered by Nurse Amal",
+                "date": "2025-06-30 13:56:21"
+            },
+            {
+                "status": "stable",
+                "note": "Manual alert triggered by Nurse Amal",
+                "date": "2025-06-30 13:56:40"
+            },
+            {
+                "status": "critical",
+                "note": "Updated to critical by Nurse Amal",
+                "date": "2025-06-30 13:57:06"
+            },
+            {
+                "status": "stable",
+                "note": "Updated to stable by Nurse Amal",
+                "date": "2025-06-30 13:57:31"
+            },
+            {
+                "status": "critical",
+                "note": "Updated to critical by Nurse Ruwaina",
+                "date": "2025-06-30 13:59:00"
+            }
+        ]
+    },
+    "3": {
+        "name": "test",
+        "age": "22",
+        "blood": "A+",
+        "doctor": "Khaled",
+        "room": "222",
+        "status": "stable",
+        "notes": [],
+        "alerted": false,
+        "last_alertby": "",
+        "nurse": "Amal",
+        "history": [
+            {
+                "status": "stable",
+                "note": "Initial status set by Nurse Amal",
+                "date": "2025-06-30 14:13:25"
             }
         ]
     }

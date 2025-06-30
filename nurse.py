@@ -26,12 +26,21 @@ def view_patients():
 def add_patient(username):
     patients = load_data(file_path)
     doctors = load_data(doctorsfile)
+    exisitingRooms = [patient["room"] for patient in patients.values()]
     
     name = input("Please enter patient name: ") 
     age = input("Please enter patient age: ")
     blood = input("Please enter patient blood group(eg. A+, O-): ")
-    room = input("Enter room number: ")
     
+    #room input
+    while True:
+        room = input("Enter room number: ")
+        if room in exisitingRooms:
+            print(f"Room {room} is alread assigned to another patient, please enter another room number ")
+        else:
+            break
+        
+    #doctor input
     while True:
         doctor = input("Please enter responsible doctor name : ")
         if doctor in doctors:
@@ -79,18 +88,21 @@ def update_status(username):
         print("Invalid status")
         return
     
-    #if status is valid
+    #if status is valid update it
     patients[id]["status"] = status
     
     patients[id]["history"].append({
             "status":status,
-            "note":f"Updated by {username}",
+            "note":f"Updated to {status} by Nurse {username}",
             "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     })
     
+    if status in ["stable","under observation"]:
+        patients[id]['alerted'] = False
+        
     #if the status is critical, this will automatically send an alert
     if status == "critical" and not patients[id]['alerted']:
-        msg = f"Yaqeth Alert \nPatient ID {id}\nName: {patients[id]["name"]}\nRoom No : {patients[id]['room']}\nStatus: Critical! sent by nurse {username} \nPlease check immediately"
+        msg = f"Yaqeth Alert \nPatient ID {id}\nName: {patients[id]["name"]}\nRoom No : {patients[id]['room']}\nStatus: {patients[id]["status"].upper()}! \nSent by nurse {username} - Please check immediately"
         send_alert(msg)
         patients[id]['alerted'] = True
         patients[id]['last_alertby'] = username
@@ -108,18 +120,15 @@ def triggeralert(username):
     if id not in patients:
         print("Patient not found")
         return
-    if patients[id]["alerted"]:
-        print("Alert already sent for this patient")
-        return
     
-    msg = f"Yaqeth Alert \nPatient ID {id}\nName: {patients[id]["name"]}\nRoom No : {patients[id]['room']}\nStatus: {patients[id]['status']} \nManual Alert triggered by nurse {username}"
+    msg = f"Manual Yaqeth Alert \nPatient ID {id}\nName: {patients[id]["name"]}\nRoom No : {patients[id]['room']}\nStatus: {patients[id]['status'].upper()} \nManual Alert triggered by nurse {username}"
     send_alert(msg)
     
     patients[id]["alerted"] = True
     patients[id]["last_alertby"] = username
     patients[id]["history"].append({
-            "status":"stable",
-            "note":f"Updated by {username}",
+            "status":patients[id]["status"],
+            "note":f"Manual alert triggered by Nurse {username}",
             "date": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     })
     
