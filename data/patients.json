@@ -1,14 +1,33 @@
 {
-    "1": {
-        "name": "Ahmed",
+    "3": {
+        "name": "Yasmeen",
+        "age": "25",
+        "blood": "B+",
+        "doctor": "Khaled",
+        "room": "201",
         "status": "stable",
-        "notes": [],
-        "alerted": true
-    },
-    "2": {
-        "name": "abdullah",
-        "status": "critical",
-        "notes": [],
-        "alerted": true
+        "notes": [
+            "Drink Water (by Dr. Khaled)"
+        ],
+        "alerted": true,
+        "last_alertby": "Amal",
+        "nurse": "Amal",
+        "history": [
+            {
+                "status": "stable",
+                "note": "Initial status set by Nurse Amal",
+                "date": "2025-06-30 02:44:52"
+            },
+            {
+                "status": "critical",
+                "note": "Updated by Amal",
+                "date": "2025-06-30 02:46:41"
+            },
+            {
+                "status": "stable",
+                "note": "Updated by Amal",
+                "date": "2025-06-30 03:33:58"
+            }
+        ]
     }
 }
