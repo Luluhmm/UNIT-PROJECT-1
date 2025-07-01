@@ -1,56 +1,93 @@
 from data.support import load_data, save_data
 import matplotlib.pyplot as plt
 from datetime import datetime
+from rich.console import Console
+from rich.table import Table
+from rich import box
+
+console = Console()
+
 
 file_path = "/Users/lulualmogbil/python-bootcamp/Yaqeth-UNIT-PROJECT-1/data/patients.json"
 def view_critical():# only outputs the critical patients
+    '''
+    This function will filter and print the critical patients only
+    '''
     patients = load_data(file_path)
-    print("Critical patients: ")
+    
+    table = Table(title="Critical Patients", box=box.SIMPLE_HEAVY)
+    table.add_column("ID", style="cyan", justify="center")
+    table.add_column("Name", style="bold")
+    table.add_column("Room", style="bold")
+    table.add_column("Doctor", style="bold")
+    
+    
+    #print("Critical patients: ")
     found = False
     for i,value in patients.items():
         if value["status"] == "critical":
-            print(f"[{i}] Patient name: {value['name']},Room No [{value['room']}]  - Responsible doctor is Dr. {value['doctor']}")
+            table.add_row(i, value["name"], value["room"], value["doctor"])
             found = True
-    if not found:
-        print("No critical cases yet. All patients are stabled")
-
+            
+    if found:
+        console.print(table)
+    else:
+        console.print("[green] No critical cases. All patients are stable.[/green]")
 
 
 def view_patient():
+    '''
+    This function will output the whole history and information for the specified patient (based on patient id)
+    '''
     patients = load_data(file_path)
-    id = input("Please enter patient id: ")
+    id = input("Please enter patient id:")
     
     if id not in patients:
-        print("Patient not found")
+        console.print("[red] Patient not found.[/red]")
         return
-    print("Patient Information: ")
-    print(f"Name: {patients[id]['name']}")
-    print(f"Age: {patients[id]['age']}")
-    print(f"Blood Type: {patients[id]['blood']}")
-    print(f"Doctor: {patients[id]['doctor']} - Nurse: {patients[id]['nurse']}")
-    print(f"Status: {patients[id]['status']} Room No[{patients[id]['room']}]")
-    print(f"Last alert by :  {patients[id]['last_alertby']}")
     
-    print("Notes: ")
+    console.print(f"\n[bold blue]Patient Information (ID {id})[/bold blue]")
+    info_table = Table(box=box.SIMPLE)
+    info_table.add_column("Attribute", style="cyan", no_wrap=True)
+    info_table.add_column("Details", style="bold")
+    
+    info_table.add_row("Name", patients[id]['name'])
+    info_table.add_row("Age", patients[id]['age'])
+    info_table.add_row("Blood", patients[id]['blood'])
+    info_table.add_row("Doctor", patients[id]['doctor'] )
+    info_table.add_row("Nurse", patients[id]['nurse'])
+    info_table.add_row("Status", patients[id]['status'])
+    info_table.add_row("Room", patients[id]['room'])
+    info_table.add_row("Last alert by", patients[id]['last_alertby'] or "N/A")
+    console.print(info_table)
+    
+    console.print("\n[bold yellow]Doctor Notes:[/bold yellow]")
     if patients[id]['notes']:
         for note in patients[id]['notes']:
-            print(f"-{note}")
+            console.print(f"• {note}")
             
     else:
-        print("No notes yet")
+        console.print("[dim]No notes available yet.[/dim]")
     
-    print("Patient History: ")
+    history_table = Table(title="Status History", box=box.SIMPLE)
+    history_table.add_column("Date", style="dim")
+    history_table.add_column("Status", style="bold")
+    history_table.add_column("Note", style="bold")
+    
     for value in patients[id]['history']:
-        print(f"[{value['date'] }] - Status : {value['status']} - Note: {value['note']}")
-    
+        history_table.add_row(value['date'], value['status'], value['note'])
+    console.print(history_table)
 
 def add_note(drname):
+    '''
+    This function will allow the Dr to add a note to any patient, the function takes the dr name as an argument
+    '''
     patients = load_data(file_path)
     
     id = input("Please enter patient ID: ")
     
     if id not in patients:
-        print("Patient not found")
+        console.print("[red] Patient not found.[/red]")
         return
     
     note = input("Write a note: ")
@@ -62,6 +99,12 @@ def add_note(drname):
     
     
 def plotHistory():
+    '''
+    This function will show the history in a chart to help the doctors observe patient progress.
+    Matplot library is used to visualize the data stored in my jason, y axis are my diffrent status levels(stable,critical..)
+    and x axix are the dates in my history to see full progress through patients journey
+    
+    '''
     patients = load_data(file_path)
     id = input("Enter patient id to view History Plot Progress: ")
 

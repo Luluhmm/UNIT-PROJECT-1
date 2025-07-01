@@ -1,45 +1,57 @@
-# UNIT-PROJECT-1
+# Yaqeth Alert System
 
+## Overview
 
+**Yaqeth** is a command-line based alert and monitoring system designed for hospitals and clinics. It helps **nurses** and **doctors** collaborate in real-time to monitor patient health, update their status, and trigger urgent alerts for critical cases.
 
-## Based on what you’ve learned until now , create a project of your choosing (impress us with your imagination) . This project must at least satisfy the following minimum requirements :
+This system ensures patients are always being tracked, especially when conditions become life-threatening. It helps nurses log and manage patient records and allows doctors to review patient history, respond to alerts, and add medical notes.
 
-- Must be interactive on CLI.
-- Use your coding skills in Python accurately.
-- Organize Your Code into modules & (or packages)
-- Use git & Github to track changes in your code.
+---
 
-## Example Project :  An online Grocery Store :
+## Users & Their Roles
 
-#### Overview : An online store that sells fruits to customers. This online store has 2 main users. The customer and the manager of the store . Each one of them should be able to do the following tasks for the store to function properly . 
+### As a Nurse, I can:
+- Add a new patient with age, blood group, doctor, and room number.
+- View all patients and their statuses.
+- Update a patient's condition (stable, critical, or under observation).
+- Manually trigger an alert to notify the doctor about any patient.
 
-### Features & User Stories
-#### As a customer I should be able to do the following :
-- Browse  Products . 
-- View the product info (summary, specs, price, quantity , etc.)
-- Search for Products.
-- Get recommendations for my next purchase based on my purchase history.
-- Add Products to the shopping cart .
-- Remove a product from the shopping cart.
-- List the products in my shopping cart. 
-- Continue to checkout . 
-- Fill in my address for delivery.
-- Get receipt of my purchases.
-- Check delivery status . 
+### As a Doctor, I can:
+- View only the patients in **critical** condition.
+- View full patient details and medical history.
+- Add notes to a patient's file for nurses to follow.
+- View a visual history chart (status over time ).
 
+---
 
+## How to Use Yaqeth
 
-#### Usage :
- Explain to the user how to use your project . 
- for example:
- - type in search product_name to search for a product.
- - type in list_products to show all the products in the grocery.
- - type in show product_name to get information about this product.
- - type in buy product_name to buy the product . 
- - and so on...
+After running the program, you’ll be prompted to log in as a **Doctor** or **Nurse**.
 
+### Nurse Commands:
+- Add new patient > follow the prompts after selecting "Add Patient".
+- Update status > enter patient ID and new condition.
+- View patients > see all admitted patients in a table.
+- Trigger alert > notify doctor manually for any status.
 
-### For your project. Edit this README.md file to include your own project name,  overview, user stories, and usage. 
+### Doctor Commands:
+- View critical patients > displays patients marked as "critical".
+- View patient details > enter patient ID to see full info.
+- Add note > attach instructions or observations to the patient record.
+- View patient history > see status updates over time.
+
+---
+
+## Technologies Used
+- Python
+- Rich (for CLI GUI design)
+- Matplotlib (for optional charting)
+- JSON files for data storage
+
+--- 
+## Why Lulwah Built This
+Lulwah's passion for building medical tech tools has been there since her childhood, always fascinated by how technology can make healthcare smarter and more human. Yaqeth is a reflection of that passion. It’s a real-world tool designed to help healthcare professionals respond faster and smarter, while also being a chance to practice building a structured, modular Python CLI app that feels like a real product.
+
 
 ### NOTE: before submitting the final project, please do the following command:
 `pip freeze > requirements.txt` to enable use to know & use the packages used in your project.
