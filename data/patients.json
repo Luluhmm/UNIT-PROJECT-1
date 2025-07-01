@@ -148,6 +148,11 @@
                 "status": "critical",
                 "note": "Updated to critical by Nurse Amal",
                 "date": "2025-07-01 13:39:04"
+            },
+            {
+                "status": "critical",
+                "note": "Manual alert triggered by Nurse Amal",
+                "date": "2025-07-01 19:08:35"
             }
         ]
     }

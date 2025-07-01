@@ -52,6 +52,3 @@ After running the program, you’ll be prompted to log in as a **Doctor** or **N
 ## Why Lulwah Built This
 Lulwah's passion for building medical tech tools has been there since her childhood, always fascinated by how technology can make healthcare smarter and more human. Yaqeth is a reflection of that passion. It’s a real-world tool designed to help healthcare professionals respond faster and smarter, while also being a chance to practice building a structured, modular Python CLI app that feels like a real product.
 
-
-### NOTE: before submitting the final project, please do the following command:
-`pip freeze > requirements.txt` to enable use to know & use the packages used in your project.
